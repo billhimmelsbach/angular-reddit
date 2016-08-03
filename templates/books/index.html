@@ -5,11 +5,10 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <div ng-repeat="book in booksCtrl.books">
+    <div ng-repeat="book in booksCtrl.embedIdList">
       <iframe title="YouTube video player" class="youtube-player" type="text/html"
-      width="640" height="390" src="{{book.embedIdList}}"
+      width="640" height="390" src="{{book}}"
       frameborder="0" allowFullScreen></iframe>
-        <p> {{book.embedIdList}} </p>
 </div>
 </div>
 </div>

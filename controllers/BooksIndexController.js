@@ -33,7 +33,19 @@ function BooksIndexController ($http) {
         vm.embedIdList.push(embedId);
         // console.log(vm.embedIdList);
       }
-    // }
+      // }
+    });
+    vm.books = vm.embedIdList;
+    console.log(vm.books);
+
+// return url;
+    // console.log(vm.books);
+    // console.log(response.data.data.children);
+    // console.log(response.data.data.children.data.url);
+    // console.log(vm.books);
+    // console.log(response.data.books)
+  }, function errorCallback(response) {
+    console.log('There was an error getting the data', response);
   });
 
   vm.books = vm.embedIdList;
