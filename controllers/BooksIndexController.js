@@ -51,5 +51,3 @@ function BooksIndexController ($http) {
   vm.books = vm.embedIdList;
   console.log(vm.books);
 }
-
-}
