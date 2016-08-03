@@ -1,8 +1,8 @@
-angular.module('libraryApp', ['ngRoute'])
+angular.module('redditApp', ['ngRoute'])
        .config(config);
 
       //  .controller('BooksShowController', BooksShowController)
-      //  .controller('BooksIndexController', BooksIndexController);
+      //  .controller('VideosIndexController', VideosIndexController);
 
 ////////////
 // ROUTES //
@@ -14,15 +14,10 @@ function config (  $routeProvider,   $locationProvider, $sceProvider)  {
 
   $routeProvider
     .when('/', {
-      templateUrl: '/templates/books/index.html',
-      controller:  'BooksIndexController',
-      controllerAs: 'booksCtrl'
+      templateUrl: '/templates/videos/index.html',
+      controller:  'VideosIndexController',
+      controllerAs: 'videosCtrl'
     })
-    .when('/books/:index', {
-        templateUrl: '/templates/books/show.html',
-        controller: 'BooksShowController',
-        controllerAs: 'bookCtrl'
-      })
     .otherwise({
       redirectTo: '/'
     });
