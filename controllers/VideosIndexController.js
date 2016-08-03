@@ -17,12 +17,19 @@ function VideosIndexController ($http) {
     // console.log(response.data.data.children);
     redditPosts = response.data.data.children;
     redditPosts.forEach(function (post) {
+      if (post.data.secure_media !== null) {
+        var videoTitle = post.data.secure_media.oembed.title;
+        console.log(videoTitle);
+      }
       var video_id = post.data.url.split('v=')[1];
       if (video_id !== undefined) {
+        var ampersandPosition = video_id.indexOf('&');
+        if (ampersandPosition != -1) {
+          video_id = video_id.substring(0, ampersandPosition);
+        }
         var embedId= "http://www.youtube.com/embed/" + video_id;
         vm.embedIdList.push(embedId);
       }
-      // }
     });
     vm.videos = vm.embedIdList;
     console.log(vm.videos);
