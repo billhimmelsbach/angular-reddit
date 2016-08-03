@@ -6,6 +6,8 @@ BooksIndexController.$inject=['$http'];
 
   function BooksIndexController ($http) {
     var vm = this;
+    vm.embedIdList = [];
+    console.log(vm.embedIdList);
     vm.newBook = {};
     vm.orderBy="title";
     vm.reverse=false;
@@ -13,14 +15,32 @@ BooksIndexController.$inject=['$http'];
     method: 'GET',
     url:'https://www.reddit.com/r/music/new.json?sort=new',
   }).then(function successCallback(response) {
-    console.log(response.data.data.children);
-    console.log(response.data.data.children[0].data.url);
-    console.log(response.data.data.children[0].data.media_embed.content);
+    // console.log(response.data.data.children);
+    // console.log(response.data.data.children[0].data.url);
+    // console.log(response.data.data.children[0].data.media_embed.content);
     redditPosts = response.data.data.children;
-    console.log(redditPosts);
-    for (var i = 0; i < redditPosts.length; i++) {
-      redditPosts[i].data.children
-    }
+    // console.log(redditPosts);
+    redditPosts.forEach(function (post) {
+      // console.log(post.data.url);
+      var video_id = post.data.url.split('v=')[1];
+      // var ampersandPosition = video_id.indexOf('&');
+      // if(ampersandPosition != -1) {
+      // video_id = video_id.substring(0, ampersandPosition);
+      // console.log(video_id);
+      if (video_id !== undefined) {
+        var embedId= "http://www.youtube.com/embed/" + video_id;
+        // console.log(embedId);
+        vm.embedIdList.push(embedId);
+        // console.log(vm.embedIdList);
+      }
+      // }
+    });
+
+    // for (var i = 0; i < redditPosts.length; i++) {
+    //   redditPosts[i].data.children;
+    // }
+    vm.books = vm.embedIdList;
+    console.log(vm.books);
     // for (var i = 0; i < redditPosts.length; i++) {
     //   array[i]
     // }
@@ -58,7 +78,7 @@ BooksIndexController.$inject=['$http'];
 
 // return url;
     // console.log(vm.books);
-    // vm.books = response.data.data.children;
+    vm.books = response.data.data.children;
     // console.log(response.data.data.children);
     // console.log(response.data.data.children.data.url);
     // console.log(vm.books);
