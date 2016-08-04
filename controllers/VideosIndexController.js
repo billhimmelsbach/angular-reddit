@@ -7,15 +7,24 @@ VideosIndexController.$inject=['$http'];
 function VideosIndexController ($http) {
   var vm = this;
   vm.dataSet = [];
+  vm.orderBy = 'title';
+  vm.reverse = false;
   // vm.orderBy="title";
   // vm.reverse=false;
   $http({
     method: 'GET',
-    url:'https://www.reddit.com/r/music/new.json?sort=new',
+    url:'https://www.reddit.com/r/music/top.json?count=5',
   }).then(function successCallback(response) {
     // console.log(response.data.data.children);
     redditPosts = response.data.data.children;
     redditPosts.forEach(function (post) {
+      if (post.data.permalink) {
+        console.log();
+      }
+      if (post.data.ups !== undefined) {
+        ups = post.data.ups;
+        console.log('UPS:', ups);
+      }
       var videoTitle = [];
       if (post.data.secure_media !== null) {
         videoTitle = post.data.secure_media.oembed.title;
@@ -35,7 +44,8 @@ function VideosIndexController ($http) {
         if (videoTitle !== []) {
           vm.dataSet.push({
             url: embedId,
-            title: videoTitle
+            title: videoTitle,
+            ups: ups
           });
         }
       }
