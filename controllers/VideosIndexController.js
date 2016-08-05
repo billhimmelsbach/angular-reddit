@@ -42,6 +42,10 @@ function VideosIndexController ($http) {
         }
         var embedId= "http://www.youtube.com/embed/" + video_id;
         if (videoTitle !== []) {
+          if (post.data.secure_media === null){
+          videoTitle = post.data.title;
+        }
+        console.log(videoTitle);
           vm.dataSet.push({
             url: embedId,
             title: videoTitle,
